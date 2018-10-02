@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using RestCalculatorServiceEX1.Model;
 
 namespace RestCalculatorServiceEX1.Controllers
 {
@@ -19,16 +20,35 @@ namespace RestCalculatorServiceEX1.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<int> Get(int id)
         {
-            return "value";
+            return id;
         }
 
         // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("Add", Name = "Add")]
+        public int Post([FromBody] Data data)
         {
+            return data.A + data.B;
         }
+
+        [HttpPost("Sub", Name = "Sub")]
+        public int Sub([FromBody] Data data)
+        {
+            return data.A - data.B;
+        }
+        [HttpPost("Multi", Name = "Multi")]
+        public int Multi([FromBody] Data data)
+        {
+            return data.A * data.B;
+        }
+        [HttpPost("Div", Name = "Div")]
+        public int Div([FromBody] Data data)
+        {
+            return data.A / data.B;
+        }
+
+
 
         // PUT api/values/5
         [HttpPut("{id}")]
